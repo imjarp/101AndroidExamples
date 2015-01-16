@@ -11,7 +11,7 @@ The steps you need to check is
 
 ```sh
 $ cd ~(yourpath)/sdk/platform-tools/
-$adb adb com.mx.jarp.AndroidServiceADB/.service.ServiceTest
+$adb com.mx.jarp.AndroidServiceADB/.service.ServiceTest
 ```
 Then you can check in the log (DEBUG) the next message
 
