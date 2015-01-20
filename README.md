@@ -4,4 +4,4 @@
 Examples
 ----------------------------
 
-- [1-AndroidServiceADB](/master/1-AndroidServiceADB)
+- [1-AndroidServiceADB](/1-AndroidServiceADB)
