@@ -4,4 +4,6 @@
 Examples
 ----------------------------
 
-- [1-AndroidServiceADB](/master/1-AndroidServiceADB)
+- [1-AndroidServiceADB](/1-AndroidServiceADB)
+- [2- AndroidLogcatADB](/2-AndroidLogcatADB)
+- [2- Application Component](/3-ApplicationComponentExample)
