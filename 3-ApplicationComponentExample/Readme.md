@@ -1,4 +1,4 @@
-# Android example #2 
+# Android example #3
 
 Application use as a singleton ,and you can use in more Android Components that are in that context.
 
