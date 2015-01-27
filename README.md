@@ -7,3 +7,4 @@ Examples
 - [1-AndroidServiceADB](/1-AndroidServiceADB)
 - [2- AndroidLogcatADB](/2-AndroidLogcatADB)
 - [3- Application Component](/3-ApplicationComponentExample)
+- [4- Basic Handler](/4-BasicHandler)
