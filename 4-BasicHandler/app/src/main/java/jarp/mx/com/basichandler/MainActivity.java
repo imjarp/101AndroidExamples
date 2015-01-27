@@ -58,8 +58,6 @@ public class MainActivity extends ActionBarActivity implements android.os.Handle
     protected void onDestroy() {
         super.onDestroy();
         // Shut down the Looper thread
-        handlerBackground.removeMessages(OperationInMainThread);
-        handlerBackground.removeMessages(OperationInBackGround);
         handlerBackground.getLooper().quit();
     }
 
@@ -115,7 +113,6 @@ public class MainActivity extends ActionBarActivity implements android.os.Handle
             default: ;
         }
 
-        msg.recycle();
         return true;
     }
 

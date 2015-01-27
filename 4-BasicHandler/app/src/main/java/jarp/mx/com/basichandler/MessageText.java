@@ -19,6 +19,6 @@ public class MessageText {
 
     public static MessageText createInstance(Handler handler , String message)
     {
-        return  new MessageText(handler , message);
+        return new MessageText(handler,message);
     }
 }
