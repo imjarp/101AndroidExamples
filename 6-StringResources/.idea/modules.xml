@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/4-BasicHandler.iml" filepath="$PROJECT_DIR$/4-BasicHandler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/6-StringResources.iml" filepath="$PROJECT_DIR$/6-StringResources.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

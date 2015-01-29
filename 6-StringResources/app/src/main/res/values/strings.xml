@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="rn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">StringResources</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="welcome_message">Dear %s we are very pleased ...</string>
+    <string name="choose_planet">Choose your planet</string>
+
+    <plurals name="courses">
+        <item quantity="one">You are currently subscribed to one course</item>
+        <item quantity="other">
+                You have subscribed to <xliff:g id="count">%s</xliff:g> courses
+            </item>
+    </plurals>
+
+    <string-array name="planets">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+        <item>Pluto</item>
+    </string-array>
+
+</resources>

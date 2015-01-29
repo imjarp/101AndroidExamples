@@ -1,4 +1,4 @@
-package jarp.mx.com.basichandler;
+package jarp.kanjo.mx.com.stringresources;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
