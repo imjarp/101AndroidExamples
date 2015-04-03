@@ -63,6 +63,63 @@ public class Piano extends View {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int pointerCount = event.getPointerCount();
+
+        int cappedPointerCount = pointerCount > MAX_FINGERS ? MAX_FINGERS :
+                                                                                           pointerCount;
+
+        int actionIndex = event.getActionIndex();
+        int action = event.getActionMasked();
+        int id = event.getPointerId(actionIndex);
+
+        if ( (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN ) && id<MAX_FINGERS ){
+
+            mFingerPoints[id] = new Point((int)event.getX(actionIndex),(int) event.getY(actionIndex));
+
+        }
+        else if ( (action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_UP) && id <MAX_FINGERS ){
+
+            mFingerPoints[id] = null;
+            invalidateKey(mFingerTones[id]);
+            mFingerTones[id] = -1;
+        }
+
+        for (int i  = 0 ; i < cappedPointerCount ; i++){
+            int index = event.findPointerIndex(i);
+            if(mFingerPoints[i]!=null && index != -1){
+                mFingerPoints[i].set( (int)event.getX(index),(int) event.getY(index) );
+                int tone = getToneForPoint(mFingerPoints[i]);
+                if(tone != mFingerTones[i] && tone != -1){
+                    invalidateKey(mFingerTones[i]);
+                    mFingerTones[i]=tone;
+                    invalidateKey(mFingerTones[i]);
+                    if( ! isKeyDown( i )){
+                        int poolIndex = mToneToIndexMap.get( mFingerTones[i] );
+                        event.getPointerCoords(index, );
+
+                    }
+                }
+
+            }
+        }
+
+        return super.onTouchEvent(event);
+    }
+
+    private boolean isKeyDown(int i) {
+        return false;
+    }
+
+    private int getToneForPoint(Point mFingerPoint) {
+        return 0;
+    }
+
+    private void invalidateKey(int mFingerTone) {
+
+    }
+
 
     @Override
     protected void onAttachedToWindow() {
@@ -94,7 +151,7 @@ public class Piano extends View {
         int blackKeyHeight = (int) ( heigth * BLACK_TO_WHITE_HEIGHT_RATIO );
 
         //Define rectangles
-        // set(int left, int top, int right, int bottom) {
+        // set(int left, int top, int right, int bottom)
         mCKey.set(0,0,whiteKeyWidth,heigth);
         mDKey.set(whiteKeyWidth,0,whiteKeyWidth*2,heigth);
         mEKey.set(whiteKeyWidth * 2,0,whiteKeyWidth*3,heigth);
@@ -104,10 +161,11 @@ public class Piano extends View {
         mBKey.set(whiteKeyWidth * 6,0,whiteKeyWidth*7,heigth);
 
 
-
-
         mCSharpKey.set( whiteKeyWidth - ( blackKeyWidth / 2 ) ,0 ,whiteKeyWidth +  (blackKeyWidth / 2 ) , blackKeyHeight );
-        mDSharpKey.set( ( whiteKeyWidth * 2 ) + ( blackKeyWidth / 2 ) , 0 , whiteKeyWidth * 2 +  (blackKeyWidth / 2 ) , blackKeyHeight );
+        mDSharpKey.set( whiteKeyWidth *2 - ( blackKeyWidth / 2 ),0,whiteKeyWidth *2 + ( blackKeyWidth / 2 ) ,blackKeyHeight);
+        mFSharpKey.set( whiteKeyWidth *4 - ( blackKeyWidth / 2 ),0,whiteKeyWidth *4 + ( blackKeyWidth / 2 ) ,blackKeyHeight);
+        mGSharpKey.set( whiteKeyWidth *5 - ( blackKeyWidth / 2 ),0,whiteKeyWidth *5 + ( blackKeyWidth / 2 ) ,blackKeyHeight);
+        mASharpKey.set( whiteKeyWidth *6 - ( blackKeyWidth / 2 ),0,whiteKeyWidth *6 + ( blackKeyWidth / 2 ) ,blackKeyHeight);
 
 
 
@@ -126,6 +184,10 @@ public class Piano extends View {
 
         canvas.drawRect(mCSharpKey,mCSharpKeyPaint);
         canvas.drawRect(mDSharpKey,mDSharpKeyPaint);
+        canvas.drawRect(mFSharpKey,mFSharpKeyPaint);
+        canvas.drawRect(mGSharpKey,mGSharpKeyPaint);
+        canvas.drawRect(mASharpKey,mASharpKeyPaint);
+
     }
 
 
