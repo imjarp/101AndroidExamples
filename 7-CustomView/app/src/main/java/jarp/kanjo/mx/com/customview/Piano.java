@@ -97,29 +97,17 @@ public class Piano extends View {
                     invalidateKey(mFingerTones[i]);
                     if( ! isKeyDown( i )){
                         int poolIndex = mToneToIndexMap.get( mFingerTones[i] );
-                        event.getPointerCoords(index, );
-
+                        event.getPointerCoords(index,mPointerCoords );
+                        float volume = mPointerCoords.getAxisValue(MotionEvent.AXIS_PRESSURE);
+                        mSoundPool.play(poolIndex,volume,volume,0,0,1f);
                     }
                 }
-
             }
         }
 
-        return super.onTouchEvent(event);
+        updatePaints();
+        return  true;
     }
-
-    private boolean isKeyDown(int i) {
-        return false;
-    }
-
-    private int getToneForPoint(Point mFingerPoint) {
-        return 0;
-    }
-
-    private void invalidateKey(int mFingerTone) {
-
-    }
-
 
     @Override
     protected void onAttachedToWindow() {
@@ -129,7 +117,7 @@ public class Piano extends View {
         Arrays.fill(mFingerTones, -1);
         loadKeySamples(getContext());
         setupPaints();
-        
+
     }
 
     @Override
@@ -190,9 +178,66 @@ public class Piano extends View {
 
     }
 
+    private boolean isKeyDown(int finger) {
 
+        int key = getToneForPoint(mFingerPoints[finger]);
 
+        for ( int i = 0 ; i< mFingerPoints.length; i++   ){
+            if(  i!= finger){
+                Point fingerPoint = mFingerPoints[i];
+                if(fingerPoint != null){
+                    int otherKey = getToneForPoint(fingerPoint);
+                    if(otherKey ==key) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return  false;
 
+    }
+
+    private void invalidateKey(int tone) {
+
+        switch (tone){
+            case R.raw.c1:
+                invalidate(mCKey);
+                break;
+            case R.raw.c1s:
+                invalidate(mCSharpKey);
+                break;
+            case R.raw.d1:
+                invalidate(mDKey);
+                break;
+            case R.raw.d1s:
+                invalidate(mDSharpKey);
+                break;
+            case R.raw.e1:
+                invalidate(mEKey);
+                break;
+            case R.raw.f1:
+                invalidate(mFKey);
+                break;
+            case R.raw.f1s:
+                invalidate(mFSharpKey);
+                break;
+            case R.raw.g1:
+                invalidate(mGKey);
+                break;
+            case R.raw.g1s:
+                invalidate(mGSharpKey);
+                break;
+            case R.raw.a1:
+                invalidate(mAKey);
+                break;
+            case R.raw.a1s:
+                invalidate(mASharpKey);
+                break;
+            case R.raw.b1:
+                invalidate(mBKey);
+                break;
+        }
+    }
 
     private void setupPaints() {
         mWhiteKeyPaint = new Paint();
@@ -251,6 +296,90 @@ public class Piano extends View {
 
     }
 
+    private void updatePaints() {
+
+        mCKeyPaint = mWhiteKeyPaint;
+        mDKeyPaint = mWhiteKeyPaint;
+        mEKeyPaint = mWhiteKeyPaint;
+        mFKeyPaint = mWhiteKeyPaint;
+        mGKeyPaint = mWhiteKeyPaint;
+        mAKeyPaint = mWhiteKeyPaint;
+        mBKeyPaint = mWhiteKeyPaint;
+
+
+        mCSharpKeyPaint= mBlackKeyPaint;
+        mDSharpKeyPaint= mBlackKeyPaint;
+        mFSharpKeyPaint= mBlackKeyPaint;
+        mGSharpKeyPaint= mBlackKeyPaint;
+        mASharpKeyPaint= mBlackKeyPaint;
+
+
+
+        for (Point fingerPoint : mFingerPoints){
+
+            if(fingerPoint != null){
+                if(mCSharpKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mCSharpKeyPaint = mBlackKeyHitPaint;
+                }else if(mDSharpKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mDSharpKeyPaint = mBlackKeyHitPaint;
+                }else if(mFSharpKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mFSharpKeyPaint = mBlackKeyHitPaint;
+                }else if(mGSharpKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mGSharpKeyPaint = mBlackKeyHitPaint;
+                }else if(mASharpKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mASharpKeyPaint = mBlackKeyHitPaint;
+                }else if(mCKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mCKeyPaint = mWhiteKeyHitPaint;
+                }else if(mDKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mDKeyPaint = mWhiteKeyHitPaint;
+                }else if(mEKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mEKeyPaint = mWhiteKeyHitPaint;
+                }else if(mFKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mFKeyPaint = mWhiteKeyHitPaint;
+                }else if(mGKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mGKeyPaint = mWhiteKeyHitPaint;
+                }else if(mAKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mAKeyPaint = mWhiteKeyHitPaint;
+                }else if(mBKey.contains(fingerPoint.x,fingerPoint.y)){
+                    mBKeyPaint = mWhiteKeyHitPaint;
+                }
+            }
+        }
+    }
+
+
+
+    private int getToneForPoint(Point point) {
+
+        if(mCSharpKey.contains(point.x,point.y))
+            return R.raw.c1s;
+        if(mDSharpKey.contains(point.x,point.y))
+            return R.raw.d1s;
+        if(mFSharpKey.contains(point.x,point.y))
+            return R.raw.f1s;
+        if(mGSharpKey.contains(point.x,point.y))
+            return R.raw.g1s;
+        if(mASharpKey.contains(point.x,point.y))
+            return R.raw.a1s;
+
+
+        if(mCKey.contains(point.x,point.y))
+            return R.raw.c1;
+        if(mDKey.contains(point.x,point.y))
+            return R.raw.d1;
+        if(mEKey.contains(point.x,point.y))
+            return R.raw.e1;
+        if(mFKey.contains(point.x,point.y))
+            return R.raw.f1;
+        if(mGKey.contains(point.x,point.y))
+            return R.raw.g1;
+        if(mAKey.contains(point.x,point.y))
+            return R.raw.a1;
+        if(mBKey.contains(point.x,point.y))
+            return R.raw.b1;
+
+        return -1;
+    }
 
 }
 
