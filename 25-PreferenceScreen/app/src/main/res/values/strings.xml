@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">25-PreferenceScreen</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <array name="network_retry_count_option_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </array>
+
+    <array name="network_retry_count_options">
+        <item>Uno</item>
+        <item>Dos</item>
+        <item>Tres</item>
+    </array>
+</resources>

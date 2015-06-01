@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Newtwork">
+
+        <CheckBoxPreference android:title="ony on wifi"
+                            android:summaryOn="this should be a summary on  wi fi"
+                            android:summaryOff="this should be a summary off wi fi"
+                            android:key="network.wifi"
+                            android:defaultValue="false">
+
+        </CheckBoxPreference>
+
+        <ListPreference
+            android:title="Retry count"
+            android:key="network.retryCount"
+            android:defaultValue="3"
+            android:entryValues="@array/network_retry_count_option_values"
+            android:entries="@array/network_retry_count_options">
+
+        </ListPreference>
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
