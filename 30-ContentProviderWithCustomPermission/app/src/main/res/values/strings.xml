@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ContentProvider</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="read_perm_descr">This permission is used to read data of JARP`s provider</string>
+    <string name="read_perm_label">Read.data.JARP.Provider</string>
+    <string name="write_perm_descr">This permission is used to write data in| JARP`s provider</string>
+    <string name="write_perm_label">Write.data.JARP.Provider</string>
+</resources>
